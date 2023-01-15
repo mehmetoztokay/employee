@@ -1,14 +1,9 @@
 import React, { useState } from 'react'
 import { Field, Formik, Form } from 'formik'
 import { EmployeeSchema } from 'validations'
-import Select from 'react-select'
 import axios from 'axios'
 
-const stylesOfSelect = {
-  control: (styles, state) => ({ ...styles, outline: 0, borderRadius: 6, padding: 2, boxShadow: state.isFocused ? '0 0 0 1px #2563eb' : null }),
-  menuList: (styles) => ({ ...styles, backgroundColor: 'transparent', borderRadius: 6 }),
-  option: (styles, state) => ({ ...styles, backgroundColor: state.isFocused ? '#bfdbfe' : 'white', color: '#000' })
-}
+import InputSelect from 'components/Selects/InputSelect'
 
 const AddEmployee = ({ setEmployees, departments, maritalStatuses }) => {
   const [addEmployeeStatus, setAddEmployeeStatus] = useState(false)
@@ -68,7 +63,7 @@ const AddEmployee = ({ setEmployees, departments, maritalStatuses }) => {
               <p className={`text-red-500 text-sm ${errors.email && touched.email ? '' : 'invisible'}`}>Hata: {errors.email}</p>
             </div>
             <div>
-              <Select
+              <InputSelect
                 onBlur={() => {
                   handleBlur({ target: { name: 'departmentId' } })
                 }}
@@ -76,12 +71,11 @@ const AddEmployee = ({ setEmployees, departments, maritalStatuses }) => {
                   setFieldValue('departmentId', option.id)
                 }}
                 options={departments.map((department) => ({ ...department, label: department.title }))}
-                styles={stylesOfSelect}
               />
               <p className={`text-red-500 text-sm ${errors.departmentId && touched.departmentId ? '' : 'invisible'}`}>Hata: {errors.departmentId}</p>
             </div>
             <div>
-              <Select
+              <InputSelect
                 onBlur={() => {
                   handleBlur({ target: { name: 'maritalStatus' } })
                 }}
@@ -89,7 +83,6 @@ const AddEmployee = ({ setEmployees, departments, maritalStatuses }) => {
                   setFieldValue('maritalStatus', option.state)
                 }}
                 options={maritalStatuses.map((maritalStatus) => ({ ...maritalStatus, label: maritalStatus.title }))}
-                styles={stylesOfSelect}
               />
               <p className={`text-red-500 text-sm ${errors.maritalStatus && touched.maritalStatus ? '' : 'invisible'}`}>Hata: {errors.maritalStatus}</p>
             </div>
