@@ -1,0 +1,1 @@
+export { SearchSchema } from './Search'
