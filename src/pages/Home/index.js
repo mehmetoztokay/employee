@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Header from 'pages/Home/Header'
+import EmployeeList from 'pages/Home/EmployeeList'
 
 const Home = () => {
   const [employees, setEmployees] = useState([])
@@ -22,8 +23,9 @@ const Home = () => {
   //   <p key={index}>{JSON.stringify(employee)}</p>
   // ))}
   return (
-    <div className='container xl mx-auto pt-24'>
+    <div className='container xl mx-auto py-24'>
       <Header />
+      <EmployeeList />
     </div>
   )
 }
