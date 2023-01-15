@@ -6,24 +6,28 @@ import EmployeeList from 'pages/Home/EmployeeList'
 const Home = () => {
   const [employees, setEmployees] = useState([])
 
+  const listingEmployees = async () => {
+    await axios
+      .get('/employees')
+      .then((response) => {
+        setEmployees(response.data)
+        console.log(response.data)
+      })
+      .catch(console.log)
+  }
+
+  const resetEmployees = () => {
+    listingEmployees()
+  }
+
   useEffect(() => {
-    try {
-      axios
-        .get('/employees')
-        .then((response) => {
-          setEmployees(response.data)
-          console.log(response.data)
-        })
-        .catch(console.log)
-    } catch (error) {
-      console.log(error)
-    }
+    listingEmployees()
   }, [])
 
   return (
     <div className='container xl mx-auto py-24'>
-      <Header />
-      <EmployeeList employees={employees} setEmployees={setEmployees} />
+      <Header setEmployees={setEmployees} />
+      <EmployeeList employees={employees} setEmployees={setEmployees} resetEmployees={resetEmployees} />
     </div>
   )
 }
