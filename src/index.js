@@ -5,6 +5,11 @@ import App from './App'
 import * as serviceWorker from './serviceWorker'
 import reportWebVitals from './reportWebVitals'
 
+// Axios settings
+import axios from 'axios'
+
+axios.defaults.baseURL = 'http://localhost:3004'
+
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(<App />)
 
