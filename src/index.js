@@ -5,13 +5,19 @@ import App from './App'
 import * as serviceWorker from './serviceWorker'
 import reportWebVitals from './reportWebVitals'
 
+import { BrowserRouter } from 'react-router-dom'
+
 // Axios settings
 import axios from 'axios'
 
 axios.defaults.baseURL = 'http://localhost:3004'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
-root.render(<App />)
+root.render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+)
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
