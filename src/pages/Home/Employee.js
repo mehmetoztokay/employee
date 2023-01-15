@@ -1,7 +1,9 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
-const Employee = ({ employee, setEmployees, departments }) => {
+import InputSelect from 'components/Selects/InputSelect'
+
+const Employee = ({ employee, setEmployees, departments, maritalStatuses }) => {
   const [employeeState, setEmployeeState] = useState(false)
   const [employeeEditing, setEmployeeEditing] = useState(false)
   const [employeeSetted, setEmployeeSetted] = useState({ ...employee })
@@ -95,12 +97,14 @@ const Employee = ({ employee, setEmployees, departments }) => {
         {!employeeState ? (
           <p className='text-gray-900 whitespace-nowrap pl-2'>{employee.maritalStatus ? 'Evli' : 'Bekâr'}</p>
         ) : (
-          <input
-            type='text'
-            className='w-full text-gray-800 whitespace-nowrap outline-1 outline-blue-600 border border-gray-300 rounded-md p-2'
-            value={employeeSetted.maritalStatus}
-            onChange={(e) => {
-              setEmployeeSetted({ ...employeeSetted, maritalStatus: e.target.value })
+          <InputSelect
+            options={maritalStatuses.map((maritalStatus) => ({ ...maritalStatus, label: maritalStatus.title }))}
+            defaultValue={{
+              label: maritalStatuses.find((maritalStatus) => maritalStatus.state === employee.maritalStatus)?.title,
+              value: maritalStatuses.find((maritalStatus) => maritalStatus.state === employee.maritalStatus)?.state
+            }}
+            onChange={(option) => {
+              setEmployeeSetted((prevEmployeeSetted) => ({ ...prevEmployeeSetted, maritalStatus: option.state }))
             }}
           />
         )}
@@ -109,17 +113,27 @@ const Employee = ({ employee, setEmployees, departments }) => {
         {!employeeState ? (
           <span className='relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight'>
             <span aria-hidden className='absolute inset-0 bg-green-200 opacity-50 rounded-full'></span>
-            <span className='relative whitespace-nowrap'>{employee.departmentId}</span>
+            <span className='relative whitespace-nowrap'>{departments.find((department) => department.id === employee.departmentId)?.title}</span>
           </span>
         ) : (
-          <input
-            type='text'
-            className='w-full text-gray-800 whitespace-nowrap outline-1 outline-blue-600 border border-gray-300 rounded-md p-2'
-            value={employeeSetted.departmentId}
-            onChange={(e) => {
-              setEmployeeSetted({ ...employeeSetted, departmentId: e.target.value })
+          <InputSelect
+            options={departments.map((department) => ({ ...department, label: department.title }))}
+            defaultValue={{
+              label: departments.find((department) => department.id === employee.departmentId)?.title,
+              value: departments.find((department) => department.id === employee.departmentId)?.id
+            }}
+            onChange={(option) => {
+              setEmployeeSetted((prevEmployeeSetted) => ({ ...prevEmployeeSetted, departmentId: option.id }))
             }}
           />
+          // <input
+          //   type='text'
+          //   className='w-full text-gray-800 whitespace-nowrap outline-1 outline-blue-600 border border-gray-300 rounded-md p-2'
+          //   value={employeeSetted.departmentId}
+          //   onChange={(e) => {
+          //     setEmployeeSetted({ ...employeeSetted, departmentId: e.target.value })
+          //   }}
+          // />
         )}
       </td>
       <td className='flex justify-end items-center text-sm lg:px-5 lg:py-5 px-2 py-2'>

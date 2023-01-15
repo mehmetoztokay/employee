@@ -38,7 +38,7 @@ const EmployeeList = ({ employees, setEmployees, departments, maritalStatuses, r
               </tr>
             ) : null}
             {employees.map((employee, index) => (
-              <Employee key={index} employee={employee} setEmployees={setEmployees} departments={departments} />
+              <Employee key={index} employee={employee} setEmployees={setEmployees} departments={departments} maritalStatuses={maritalStatuses} />
             ))}
           </tbody>
         </table>

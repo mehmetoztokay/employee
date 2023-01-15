@@ -64,6 +64,7 @@ const AddEmployee = ({ setEmployees, departments, maritalStatuses }) => {
             </div>
             <div>
               <InputSelect
+                placeholder='Departman'
                 onBlur={() => {
                   handleBlur({ target: { name: 'departmentId' } })
                 }}
@@ -76,6 +77,7 @@ const AddEmployee = ({ setEmployees, departments, maritalStatuses }) => {
             </div>
             <div>
               <InputSelect
+                placeholder='Medeni durum'
                 onBlur={() => {
                   handleBlur({ target: { name: 'maritalStatus' } })
                 }}

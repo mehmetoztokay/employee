@@ -8,7 +8,7 @@ const stylesOfSelect = {
 }
 
 const InputSelect = (props) => {
-  return <Select {...props} styles={stylesOfSelect} />
+  return <Select {...props} styles={stylesOfSelect} menuPlacement='auto' />
 }
 
 export default InputSelect
