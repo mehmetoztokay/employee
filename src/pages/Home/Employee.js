@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
-const Employee = ({ employee, setEmployees }) => {
+const Employee = ({ employee, setEmployees, departments }) => {
   const [employeeState, setEmployeeState] = useState(false)
   const [employeeEditing, setEmployeeEditing] = useState(false)
   const [employeeSetted, setEmployeeSetted] = useState({ ...employee })

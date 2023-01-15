@@ -72,13 +72,12 @@ const Header = ({ setEmployees }) => {
                   </button>
                 </div>
 
-                {errors.searchValue && touched ? <p className='text-red-500 text-sm'>{errors.searchValue}</p> : ''}
+                <p className={`text-red-500 text-sm ${errors.searchValue && touched ? '' : 'invisible'}`}>Hata: {errors.searchValue}</p>
               </Form>
             )}
           </Formik>
         </div>
       </div>
-      <button className='inline-block bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-all px-4 py-1 mt-14'>Yeni Ekle</button>
     </>
   )
 }

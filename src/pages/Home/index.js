@@ -5,13 +5,35 @@ import EmployeeList from 'pages/Home/EmployeeList'
 
 const Home = () => {
   const [employees, setEmployees] = useState([])
+  const [departments, setDepartments] = useState([])
+
+  const maritalStatuses = [
+    {
+      id: 1,
+      state: false,
+      title: 'Bekâr'
+    },
+    {
+      id: 1,
+      state: true,
+      title: 'Evli'
+    }
+  ]
 
   const listingEmployees = async () => {
     await axios
       .get('/employees')
       .then((response) => {
         setEmployees(response.data)
-        console.log(response.data)
+      })
+      .catch(console.log)
+  }
+
+  const listingDepartments = async () => {
+    await axios
+      .get('/departments')
+      .then((response) => {
+        setDepartments(response.data)
       })
       .catch(console.log)
   }
@@ -22,12 +44,13 @@ const Home = () => {
 
   useEffect(() => {
     listingEmployees()
+    listingDepartments()
   }, [])
 
   return (
     <div className='container xl mx-auto py-24'>
       <Header setEmployees={setEmployees} />
-      <EmployeeList employees={employees} setEmployees={setEmployees} resetEmployees={resetEmployees} />
+      <EmployeeList employees={employees} setEmployees={setEmployees} departments={departments} maritalStatuses={maritalStatuses} resetEmployees={resetEmployees} />
     </div>
   )
 }
