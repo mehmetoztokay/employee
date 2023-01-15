@@ -12,6 +12,7 @@ const Home = () => {
         .get('/employees')
         .then((response) => {
           setEmployees(response.data)
+          console.log(response.data)
         })
         .catch(console.log)
     } catch (error) {
@@ -19,13 +20,10 @@ const Home = () => {
     }
   }, [])
 
-  // {employees.map((employee, index) => (
-  //   <p key={index}>{JSON.stringify(employee)}</p>
-  // ))}
   return (
     <div className='container xl mx-auto py-24'>
       <Header />
-      <EmployeeList />
+      <EmployeeList employees={employees} setEmployees={setEmployees} />
     </div>
   )
 }
